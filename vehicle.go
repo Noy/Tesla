@@ -1,199 +1,201 @@
-package main
+package tesla
 
-func getCarType() string {
-	return stateRequest().TeslaStateResponse.VehicleState.CarType
-}
-
-func getChargePortType() string {
-	return stateRequest().TeslaStateResponse.VehicleState.ChargePortType
-}
-func isEUVehicle() bool {
-	return stateRequest().TeslaStateResponse.VehicleState.IsEUVehicle
-}
-func getExteriorColor() string {
-	return stateRequest().TeslaStateResponse.VehicleState.ExteriorColor
+func (a *AuthTesla) GetCarType() string {
+	return a.stateRequest().TeslaStateResponse.VehicleState.CarType
 }
 
-func getOdometerReading() float64 {
-	return stateRequest().TeslaStateResponse.VehicleState.Odometer
+func (a *AuthTesla) GetChargePortType() string {
+	return a.stateRequest().TeslaStateResponse.VehicleState.ChargePortType
 }
 
-func getCarVersion() string {
-	return stateRequest().TeslaStateResponse.VehicleState.CarVersion
+func (a *AuthTesla) IsEUVehicle() bool {
+	return a.stateRequest().TeslaStateResponse.VehicleState.IsEUVehicle
 }
 
-func getChargingState() string {
-	return stateRequest().TeslaStateResponse.ChargeState.ChargingState
+func (a *AuthTesla) GetExteriorColor() string {
+	return a.stateRequest().TeslaStateResponse.VehicleState.ExteriorColor
 }
 
-func getBatteryLevel() int {
-	return stateRequest().TeslaStateResponse.ChargeState.BatteryLevel
+func (a *AuthTesla) GetOdometerReading() float64 {
+	return a.stateRequest().TeslaStateResponse.VehicleState.Odometer
 }
 
-func getChargePortLatch() string {
-	return stateRequest().TeslaStateResponse.ChargeState.ChargePortLatch
+func (a *AuthTesla) GetCarVersion() string {
+	return a.stateRequest().TeslaStateResponse.VehicleState.CarVersion
 }
 
-func batteryHeaterOn() bool {
-	return stateRequest().TeslaStateResponse.ChargeState.BatteryHeaterOn
+func (a *AuthTesla) GetChargingState() string {
+	return a.stateRequest().TeslaStateResponse.ChargeState.ChargingState
 }
 
-func getChargeCurrentRequest() int {
-	return stateRequest().TeslaStateResponse.ChargeState.ChargeCurrentRequest
+func (a *AuthTesla) GetBatteryLevel() int {
+	return a.stateRequest().TeslaStateResponse.ChargeState.BatteryLevel
 }
 
-func getChargeCurrentRequestMax() int {
-	return stateRequest().TeslaStateResponse.ChargeState.ChargeCurrentRequestMax
+func (a *AuthTesla) GetChargePortLatch() string {
+	return a.stateRequest().TeslaStateResponse.ChargeState.ChargePortLatch
 }
 
-func chargeEnableRequest() bool {
-	return stateRequest().TeslaStateResponse.ChargeState.ChargeEnableRequest
+func (a *AuthTesla) BatteryHeaterOn() bool {
+	return a.stateRequest().TeslaStateResponse.ChargeState.BatteryHeaterOn
 }
 
-func getChargeEnergyAdded() float64 {
-	return stateRequest().TeslaStateResponse.ChargeState.ChargeEnergyAdded
+func (a *AuthTesla) GetChargeCurrentRequest() int {
+	return a.stateRequest().TeslaStateResponse.ChargeState.ChargeCurrentRequest
 }
 
-func getChargeLimitSoc() int {
-	return stateRequest().TeslaStateResponse.ChargeState.ChargeLimitSoc
+func (a *AuthTesla) GetChargeCurrentRequestMax() int {
+	return a.stateRequest().TeslaStateResponse.ChargeState.ChargeCurrentRequestMax
 }
 
-func getChargeLimitSocMax() int {
-	return stateRequest().TeslaStateResponse.ChargeState.ChargeLimitSocMax
+func (a *AuthTesla) ChargeEnableRequest() bool {
+	return a.stateRequest().TeslaStateResponse.ChargeState.ChargeEnableRequest
 }
 
-func getChargeLimitSocMin() int {
-	return stateRequest().TeslaStateResponse.ChargeState.ChargeLimitSocMin
+func (a *AuthTesla) GetChargeEnergyAdded() float64 {
+	return a.stateRequest().TeslaStateResponse.ChargeState.ChargeEnergyAdded
 }
 
-func getChargeLimitSocStd() int {
-	return stateRequest().TeslaStateResponse.ChargeState.ChargeLimitSocStd
+func (a *AuthTesla) GetChargeLimitSoc() int {
+	return a.stateRequest().TeslaStateResponse.ChargeState.ChargeLimitSoc
 }
 
-func getChargeMilesAddedIdeal() float64 {
-	return stateRequest().TeslaStateResponse.ChargeState.ChargeMilesAddedIdeal
+func (a *AuthTesla) GetChargeLimitSocMax() int {
+	return a.stateRequest().TeslaStateResponse.ChargeState.ChargeLimitSocMax
 }
 
-func getChargeMilesAddedRated() float64 {
-	return stateRequest().TeslaStateResponse.ChargeState.ChargeMilesAddedRated
+func (a *AuthTesla) GetChargeLimitSocMin() int {
+	return a.stateRequest().TeslaStateResponse.ChargeState.ChargeLimitSocMin
 }
 
-func getChargePointDoorOpen() bool {
-	return stateRequest().TeslaStateResponse.ChargeState.ChargePointDoorOpen
+func (a *AuthTesla) GetChargeLimitSocStd() int {
+	return a.stateRequest().TeslaStateResponse.ChargeState.ChargeLimitSocStd
 }
 
-func getChargeRate() float64 {
-	return stateRequest().TeslaStateResponse.ChargeState.ChargeRate
+func (a *AuthTesla) GetChargeMilesAddedIdeal() float64 {
+	return a.stateRequest().TeslaStateResponse.ChargeState.ChargeMilesAddedIdeal
 }
 
-func chargeToMaxRange() bool {
-	return stateRequest().TeslaStateResponse.ChargeState.ChargeToMaxRange
+func (a *AuthTesla) GetChargeMilesAddedRated() float64 {
+	return a.stateRequest().TeslaStateResponse.ChargeState.ChargeMilesAddedRated
 }
 
-func getChargerActualCurrent() int {
-	return stateRequest().TeslaStateResponse.ChargeState.ChargerActualCurrent
+func (a *AuthTesla) GetChargePointDoorOpen() bool {
+	return a.stateRequest().TeslaStateResponse.ChargeState.ChargePointDoorOpen
 }
 
-func getChargerPhases() string {
-	return stateRequest().TeslaStateResponse.ChargeState.ChargerPhases
+func (a *AuthTesla) GetChargeRate() float64 {
+	return a.stateRequest().TeslaStateResponse.ChargeState.ChargeRate
 }
 
-func getChargerPilotCurrent() int {
-	return stateRequest().TeslaStateResponse.ChargeState.ChargerPilotCurrent
+func (a *AuthTesla) chargeToMaxRange() bool {
+	return a.stateRequest().TeslaStateResponse.ChargeState.ChargeToMaxRange
 }
 
-func getChargerPower() int {
-	return stateRequest().TeslaStateResponse.ChargeState.ChargerPower
+func (a *AuthTesla) GetChargerActualCurrent() int {
+	return a.stateRequest().TeslaStateResponse.ChargeState.ChargerActualCurrent
 }
 
-func getEstimatedBatteryRange() float64 {
-	return stateRequest().TeslaStateResponse.ChargeState.EstimatedBatteryRange
+func (a *AuthTesla) GetChargerPhases() string {
+	return a.stateRequest().TeslaStateResponse.ChargeState.ChargerPhases
 }
 
-func getChargerVoltage() int {
-	return stateRequest().TeslaStateResponse.ChargeState.ChargerVoltage
+func (a *AuthTesla) GetChargerPilotCurrent() int {
+	return a.stateRequest().TeslaStateResponse.ChargeState.ChargerPilotCurrent
 }
 
-func getTimeTilFullCharge() float64 {
-	return stateRequest().TeslaStateResponse.ChargeState.TimeTilFullCharge
+func (a *AuthTesla) GetChargerPower() int {
+	return a.stateRequest().TeslaStateResponse.ChargeState.ChargerPower
 }
 
-func getIdealBatteryRange() float64 {
-	return stateRequest().TeslaStateResponse.ChargeState.IdealBatteryRange
+func (a *AuthTesla) GetEstimatedBatteryRange() float64 {
+	return a.stateRequest().TeslaStateResponse.ChargeState.EstimatedBatteryRange
 }
 
-func getShiftState() string {
-	return stateRequest().TeslaStateResponse.DriveState.ShiftState
+func (a *AuthTesla) GetChargerVoltage() int {
+	return a.stateRequest().TeslaStateResponse.ChargeState.ChargerVoltage
 }
 
-func getSpeed() string {
-	return stateRequest().TeslaStateResponse.DriveState.Speed
+func (a *AuthTesla) GetTimeTilFullCharge() float64 {
+	return a.stateRequest().TeslaStateResponse.ChargeState.TimeTilFullCharge
 }
 
-func getPower() int {
-	return stateRequest().TeslaStateResponse.DriveState.Power
+func (a *AuthTesla) GetIdealBatteryRange() float64 {
+	return a.stateRequest().TeslaStateResponse.ChargeState.IdealBatteryRange
 }
 
-func getLatitude() float64 {
-	return stateRequest().TeslaStateResponse.DriveState.Latitude
+func (a *AuthTesla) GetShiftState() string {
+	return a.stateRequest().TeslaStateResponse.DriveState.ShiftState
 }
 
-func getLongitude() float64 {
-	return stateRequest().TeslaStateResponse.DriveState.Longitude
+func (a *AuthTesla) GetSpeed() string {
+	return a.stateRequest().TeslaStateResponse.DriveState.Speed
 }
 
-func getHeading() int {
-	return stateRequest().TeslaStateResponse.DriveState.Heading
+func (a *AuthTesla) GetPower() int {
+	return a.stateRequest().TeslaStateResponse.DriveState.Power
 }
 
-func getGpsAsOf() int64 {
-	return stateRequest().TeslaStateResponse.GUISettings.GpsAsOf
+func (a *AuthTesla) GetLatitude() float64 {
+	return a.stateRequest().TeslaStateResponse.DriveState.Latitude
 }
 
-func getDistanceUnits() string {
-	return stateRequest().TeslaStateResponse.GUISettings.GUIDistanceUnits
+func (a *AuthTesla) GetLongitude() float64 {
+	return a.stateRequest().TeslaStateResponse.DriveState.Longitude
 }
 
-func getTemperatureUnits() string {
-	return stateRequest().TeslaStateResponse.GUISettings.GUITemperatureUnits
+func (a *AuthTesla) GetHeading() int {
+	return a.stateRequest().TeslaStateResponse.DriveState.Heading
 }
 
-func getChargeRateUnits() string {
-	return stateRequest().TeslaStateResponse.GUISettings.GUIChargeRateUnits
+func (a *AuthTesla) GetGpsAsOf() int64 {
+	return a.stateRequest().TeslaStateResponse.GUISettings.GpsAsOf
 }
 
-func is24HourTime() bool {
-	return stateRequest().TeslaStateResponse.GUISettings.GUI24HourTime
+func (a *AuthTesla) GetDistanceUnits() string {
+	return a.stateRequest().TeslaStateResponse.GUISettings.GUIDistanceUnits
 }
 
-func getRangeDisplay() string {
-	return stateRequest().TeslaStateResponse.GUISettings.GUIRangeDisplay
+func (a *AuthTesla) GetTemperatureUnits() string {
+	return a.stateRequest().TeslaStateResponse.GUISettings.GUITemperatureUnits
 }
 
-func getCarID() int64 {
-	return stateRequest().TeslaStateResponse.ID
+func (a *AuthTesla) GetChargeRateUnits() string {
+	return a.stateRequest().TeslaStateResponse.GUISettings.GUIChargeRateUnits
 }
 
-func getCarName() string {
-	return stateRequest().TeslaStateResponse.Name
+func (a *AuthTesla) Is24HourTime() bool {
+	return a.stateRequest().TeslaStateResponse.GUISettings.GUI24HourTime
 }
 
-func getCarState() string {
-	return stateRequest().TeslaStateResponse.State
+func (a *AuthTesla) GetRangeDisplay() string {
+	return a.stateRequest().TeslaStateResponse.GUISettings.GUIRangeDisplay
 }
 
-func getCarVIN() string {
-	return stateRequest().TeslaStateResponse.VIN
+func (a *AuthTesla) GetCarID() int64 {
+	return a.stateRequest().TeslaStateResponse.ID
 }
 
-func getCarUserID() int64 {
-	return stateRequest().TeslaStateResponse.UserID
+func (a *AuthTesla) GetCarName() string {
+	return a.stateRequest().TeslaStateResponse.Name
 }
 
-func getCarVehicleID() int64 {
-	return stateRequest().TeslaStateResponse.VehicleID
+func (a *AuthTesla) GetCarState() string {
+	return a.stateRequest().TeslaStateResponse.State
 }
 
-func isInService() bool {
-	return stateRequest().TeslaStateResponse.InService
+func (a *AuthTesla) GetCarVIN() string {
+	return a.stateRequest().TeslaStateResponse.VIN
+}
+
+func (a *AuthTesla) GetCarUserID() int64 {
+	return a.stateRequest().TeslaStateResponse.UserID
+}
+
+func (a *AuthTesla) GetCarVehicleID() int64 {
+	return a.stateRequest().TeslaStateResponse.VehicleID
+}
+
+func (a *AuthTesla) IsInService() bool {
+	return a.stateRequest().TeslaStateResponse.InService
 }

@@ -1,4 +1,4 @@
-package main
+package tesla
 
 import (
 	"encoding/json"
@@ -7,8 +7,8 @@ import (
 	"net/http"
 )
 
-func listVehiclesData() []TeslaStateResponse {
-	resp, err := getVehicleState("GET", "https://owner-api.teslamotors.com/api/1/vehicles")
+func (a *AuthTesla) listVehiclesData() []TeslaStateResponse {
+	resp, err := a.getVehicleState("GET", "https://owner-api.teslamotors.com/api/1/vehicles")
 	if err != nil {
 		log.Println(err.Error())
 	}
@@ -21,9 +21,8 @@ func listVehiclesData() []TeslaStateResponse {
 	return r.TeslaStateResponse
 }
 
-func stateRequest() *TeslaState {
-	cfg := getConfig()
-	resp, err := getVehicleState("GET", "https://owner-api.teslamotors.com/api/1/vehicles/"+cfg.ID+"/vehicle_data")
+func (a *AuthTesla) stateRequest() *TeslaState {
+	resp, err := a.getVehicleState("GET", "https://owner-api.teslamotors.com/api/1/vehicles/"+a.ID+"/vehicle_data")
 	if err != nil {
 		log.Println(err.Error())
 	}
@@ -36,13 +35,13 @@ func stateRequest() *TeslaState {
 	return &r
 }
 
-func getVehicleState(method, url string) (*http.Response, error) {
+func (a *AuthTesla) getVehicleState(method, url string) (*http.Response, error) {
 	client := &http.Client{}
 	req, err := http.NewRequest(method, url, nil)
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Set("Authorization", "Bearer "+getConfig().AccessToken)
+	req.Header.Set("Authorization", "Bearer "+a.AccessToken)
 	req.Header.Set("user-agent", "007")
 	resp, err := client.Do(req)
 	if err != nil {

@@ -1,4 +1,4 @@
-package main
+package tesla
 
 import (
 	"fmt"
@@ -7,14 +7,13 @@ import (
 	"net/http"
 )
 
-func commandBaseRequest(cmd string) (string, error) {
-	cfg := getConfig()
+func (a *AuthTesla) commandBaseRequest(cmd string) (string, error) {
 	client := &http.Client{}
-	req, err := http.NewRequest("POST", "https://owner-api.teslamotors.com/api/1/vehicles/"+cfg.ID+"/command/"+cmd, nil)
+	req, err := http.NewRequest("POST", "https://owner-api.teslamotors.com/api/1/vehicles/"+a.ID+"/command/"+cmd, nil)
 	if err != nil {
 		return "Error with URL Request", err
 	}
-	req.Header.Set("Authorization", "Bearer "+cfg.AccessToken)
+	req.Header.Set("Authorization", "Bearer "+a.AccessToken)
 	req.Header.Set("user-agent", "007")
 	resp, err := client.Do(req)
 	if err != nil {
@@ -31,51 +30,67 @@ func commandBaseRequest(cmd string) (string, error) {
 	return jsonPrettyPrint(string(respBody)), nil
 }
 
-func wakeUp() { doRequest("wake_up") }
+func (a *AuthTesla) WakeUp() { a.doRequest("wake_up") }
 
-func lock(setting bool) {
+func (a *AuthTesla) Lock(setting bool) {
 	lock := "lock"
 	if !setting {
 		lock = "unlock"
 	}
-	doRequest("door_" + lock)
+	a.doRequest("door_" + lock)
 }
 
-func honkHorn() { doRequest("honk_horn") }
-
-func flashLights() { doRequest("flash_lights") }
-
-func autoConditioningStart() { doRequest("auto_conditioning_start") }
-
-func autoConditioningStop() { doRequest("auto_conditioning_stop") }
-
-func setTemps(driverTemp, passengerTemp string) {
-	doRequest("set_temps?driver_temp=" + driverTemp + "passanger_temp=" + passengerTemp)
+func (a *AuthTesla) HonkHorn() {
+	a.doRequest("honk_horn")
 }
 
-func setChargeLimit(percent string) { doRequest("set_charge_limit?percent=" + percent) }
+func (a *AuthTesla) FlashLights() { a.doRequest("flash_lights") }
 
-func chargeMaxRange() { doRequest("charge_max_range") }
+func (a *AuthTesla) AutoConditioning(startOrStop string) {
+	a.doRequest("auto_conditioning_" + startOrStop)
+}
 
-func chargeStandard() { doRequest("charge_standard") }
+func (a *AuthTesla) SetTemps(driverTemp, passengerTemp string) {
+	a.doRequest("set_temps?driver_temp=" + driverTemp + "passanger_temp=" + passengerTemp)
+}
 
-func acuteTrunk() { doRequest("actuate_trunk") }
+func (a *AuthTesla) SetChargeLimit(percent string) {
+	a.doRequest("set_charge_limit?percent=" + percent)
+}
 
-func chargePort(openOrClose string) { doRequest("charge_port_door_" + openOrClose) }
+func (a *AuthTesla) ChargeMaxRange() {
+	a.doRequest("charge_max_range")
+}
 
-func charge(startOrStop string) { doRequest("charge_" + startOrStop) }
+func (a *AuthTesla) ChargeStandard() {
+	a.doRequest("charge_standard")
+}
 
-func setValetMode(on string, pin string) { doRequest("set_valet_mode?on=" + on + "&password=" + pin) }
+func (a *AuthTesla) AcuteTrunk() {
+	a.doRequest("actuate_trunk")
+}
 
-func doRequest(request string) {
-	do, err := commandBaseRequest(request)
+func (a *AuthTesla) ChargePort(openOrClose string) {
+	a.doRequest("charge_port_door_" + openOrClose)
+}
+
+func (a *AuthTesla) Charge(startOrStop string) {
+	a.doRequest("charge_" + startOrStop)
+}
+
+func (a *AuthTesla) SetValetMode(on string, pin string) {
+	a.doRequest("set_valet_mode?on=" + on + "&password=" + pin)
+}
+
+func (a *AuthTesla) doRequest(request string) {
+	do, err := a.commandBaseRequest(request)
 	if err != nil {
 		log.Println(err.Error())
 	}
 	fmt.Print(do)
 }
 
-//func openTrunk(which string) {
+//func (a *AuthTesla) openTrunk(which string) {
 //	id := getVehicleID()
 //	idAsString := strconv.Itoa(int(id))
 //	resp, err := baseRequest("POST", "vehicles/"+idAsString+"/command/trunk_open")
