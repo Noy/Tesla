@@ -7,26 +7,40 @@ import (
 	"net/http"
 )
 
-func (a *AuthTesla) listVehiclesData() []TeslaStateResponse {
+func (a *AuthTesla) listVehiclesData() []StateResponse {
 	resp, err := a.getVehicleState("GET", "https://owner-api.teslamotors.com/api/1/vehicles")
 	if err != nil {
 		log.Println(err.Error())
 	}
 	defer resp.Body.Close()
-	var r TeslaVehicle
+	var r Vehicle
 	respBody, err := ioutil.ReadAll(resp.Body)
 	if err := json.Unmarshal(respBody, &r); err != nil {
 		log.Println(err.Error())
 	}
-	return r.TeslaStateResponse
+	return r.StateResponse
 }
 
-func (a *AuthTesla) stateRequest() *TeslaState {
+func (a *AuthTesla) ListVehicleData(id string) StateResponse {
+	resp, err := a.getVehicleState("GET", "https://owner-api.teslamotors.com/api/1/vehicles/"+id+"/vehicle_data")
+	if err != nil {
+		log.Println(err.Error())
+	}
+	defer resp.Body.Close()
+	var r State
+	respBody, err := ioutil.ReadAll(resp.Body)
+	if err := json.Unmarshal(respBody, &r); err != nil {
+		log.Println(err.Error())
+	}
+	return r.StateResponse
+}
+
+func (a *AuthTesla) stateRequest() *State {
 	resp, err := a.getVehicleState("GET", "https://owner-api.teslamotors.com/api/1/vehicles/"+a.ID+"/vehicle_data")
 	if err != nil {
 		log.Println(err.Error())
 	}
-	var r TeslaState
+	var r State
 	defer resp.Body.Close()
 	respBody, _ := ioutil.ReadAll(resp.Body)
 	if err := json.Unmarshal(respBody, &r); err != nil {

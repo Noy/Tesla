@@ -1,11 +1,11 @@
 package tesla
 
-type TeslaState struct {
-	TeslaStateResponse TeslaStateResponse `json:"response"`
+type State struct {
+	StateResponse StateResponse `json:"response"`
 }
 
-type TeslaVehicle struct {
-	TeslaStateResponse []TeslaStateResponse `json:"response"`
+type Vehicle struct {
+	StateResponse []StateResponse `json:"response"`
 }
 
 type ChargeState struct {
@@ -51,13 +51,15 @@ type ChargeState struct {
 }
 
 type VehicleState struct {
-	CarType        string  `json:"car_type"`
-	ChargePortType string  `json:"charge_port_type"`
-	IsEUVehicle    bool    `json:"eu_vehicle"`
-	ExteriorColor  string  `json:"exterior_color"`
-	CarVersion     string  `json:"car_version"`
-	SentryMode     bool    `json:"sentry_mode"`
-	Odometer       float64 `json:"Odometer"`
+	CarType          string  `json:"car_type"`
+	ChargePortType   string  `json:"charge_port_type"`
+	SentryModeActive bool    `json:"sentry_mode"`
+	IsLocked         bool    `json:"locked"`
+	IsEUVehicle      bool    `json:"eu_vehicle"`
+	ExteriorColor    string  `json:"exterior_color"`
+	CarVersion       string  `json:"car_version"`
+	SentryMode       bool    `json:"sentry_mode"`
+	Odometer         float64 `json:"Odometer"`
 }
 
 type DriveState struct {
@@ -69,6 +71,11 @@ type DriveState struct {
 	Longitude  float64 `json:"longitude"`
 }
 
+type ClimateState struct {
+	InsideTemp  float64 `json:"inside_temp"`
+	OutsideTemp float64 `json:"outside_temp"`
+}
+
 type GUISettings struct {
 	GpsAsOf             int64  `json:"gps_as_of"`
 	GUIDistanceUnits    string `json:"gui_distance_units"`
@@ -78,18 +85,18 @@ type GUISettings struct {
 	GUIRangeDisplay     string `json:"gui_range_display"`
 }
 
-type TeslaStateResponse struct {
-	ID          int64  `json:"id"`
-	UserID      int64  `json:"user_id"`
-	VehicleID   int64  `json:"vehicle_id"`
-	VIN         string `json:"vin"`
-	Name        string `json:"name"`
-	DisplayName string `json:"display_name"`
-	State       string `json:"state"`
-	InService   bool   `json:"in_service"`
-	//ClimateState ClimateState `json:"climate_state"`
+type StateResponse struct {
+	ID           int64        `json:"id"`
+	UserID       int64        `json:"user_id"`
+	VehicleID    int64        `json:"vehicle_id"`
+	VIN          string       `json:"vin"`
+	Name         string       `json:"name"`
+	DisplayName  string       `json:"display_name"`
+	State        string       `json:"state"`
+	InService    bool         `json:"in_service"`
 	DriveState   DriveState   `json:"drive_state"`
 	ChargeState  ChargeState  `json:"charge_state"`
 	GUISettings  GUISettings  `json:"gui_settings"`
 	VehicleState VehicleState `json:"vehicle_state"`
+	ClimateState ClimateState `json:"climate_state"`
 }
