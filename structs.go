@@ -4,6 +4,10 @@ type TeslaState struct {
 	TeslaStateResponse TeslaStateResponse `json:"response"`
 }
 
+type TeslaVehicle struct {
+	TeslaStateResponse []TeslaStateResponse `json:"response"`
+}
+
 type ChargeState struct {
 	ChargingState               string  `json:"charging_state"`
 	FastChargerType             string  `json:"fast_charger_type"`
@@ -47,44 +51,45 @@ type ChargeState struct {
 }
 
 type VehicleState struct {
-	CarType               string  `json:"car_type"`
-	ChargePortType               string  `json:"charge_port_type"`
-	IsEUVehicle               bool  `json:"eu_vehicle"`
-	ExteriorColor               bool  `json:"exterior_color"`
-	CarVersion               string  `json:"car_version"`
-	SentryMode               bool  `json:"sentry_mode"`
-	Odometer               float64  `json:"Odometer"`
+	CarType        string  `json:"car_type"`
+	ChargePortType string  `json:"charge_port_type"`
+	IsEUVehicle    bool    `json:"eu_vehicle"`
+	ExteriorColor  string  `json:"exterior_color"`
+	CarVersion     string  `json:"car_version"`
+	SentryMode     bool    `json:"sentry_mode"`
+	Odometer       float64 `json:"Odometer"`
 }
 
 type DriveState struct {
-	ShiftState          string  `json:"shift_state"`
-	Speed               string  `json:"speed"`
-	Power               int     `json:"power"`
-	Heading             int     `json:"heading"`
-	Latitude            float64 `json:"latitude"`
-	Longitude           float64 `json:"longitude"`
+	ShiftState string  `json:"shift_state"`
+	Speed      string  `json:"speed"`
+	Power      int     `json:"power"`
+	Heading    int     `json:"heading"`
+	Latitude   float64 `json:"latitude"`
+	Longitude  float64 `json:"longitude"`
 }
 
 type GUISettings struct {
-	GpsAsOf             int64   `json:"gps_as_of"`
-	GUIDistanceUnits    string  `json:"gui_distance_units"`
-	GUITemperatureUnits string  `json:"gui_temperature_units"`
-	GUIChargeRateUnits  string  `json:"gui_charge_rate_units"`
-	GUI24HourTime       bool    `json:"gui_24_hour_time"`
-	GUIRangeDisplay     string    `json:"gui_range_display"`
+	GpsAsOf             int64  `json:"gps_as_of"`
+	GUIDistanceUnits    string `json:"gui_distance_units"`
+	GUITemperatureUnits string `json:"gui_temperature_units"`
+	GUIChargeRateUnits  string `json:"gui_charge_rate_units"`
+	GUI24HourTime       bool   `json:"gui_24_hour_time"`
+	GUIRangeDisplay     string `json:"gui_range_display"`
 }
 
 type TeslaStateResponse struct {
-	ID int64 `json:"id"`
-	UserID int64 `json:"user_id"`
-	VehicleID int64 `json:"vehicle_id"`
-	VIN string `json:"vin"`
-	Name string `json:"name"`
-	State string `json:"state"`
-	InService bool `json:"in_service"`
+	ID          int64  `json:"id"`
+	UserID      int64  `json:"user_id"`
+	VehicleID   int64  `json:"vehicle_id"`
+	VIN         string `json:"vin"`
+	Name        string `json:"name"`
+	DisplayName string `json:"display_name"`
+	State       string `json:"state"`
+	InService   bool   `json:"in_service"`
 	//ClimateState ClimateState `json:"climate_state"`
-	DriveState DriveState `json:"drive_state"`
-	ChargeState ChargeState `json:"charge_state"`
-	GUISettings GUISettings `json:"gui_settings"`
+	DriveState   DriveState   `json:"drive_state"`
+	ChargeState  ChargeState  `json:"charge_state"`
+	GUISettings  GUISettings  `json:"gui_settings"`
 	VehicleState VehicleState `json:"vehicle_state"`
 }
