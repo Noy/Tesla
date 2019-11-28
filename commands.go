@@ -1,3 +1,5 @@
+// Copyright 2019 Noy H. All rights reserved.
+// @author Noy Hillel
 package tesla
 
 import (
@@ -90,6 +92,7 @@ func (a *AuthTesla) doRequest(request string) {
 	fmt.Print(do)
 }
 
+// Needs work
 //func (a *AuthTesla) openTrunk(which string) {
 //	id := getVehicleID()
 //	idAsString := strconv.Itoa(int(id))

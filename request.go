@@ -1,3 +1,5 @@
+// Copyright 2019 Noy H. All rights reserved.
+// @author Noy Hillel
 package tesla
 
 import (
@@ -7,8 +9,8 @@ import (
 	"net/http"
 )
 
-func (a *AuthTesla) listVehiclesData() []StateResponse {
-	resp, err := a.getVehicleState("GET", "https://owner-api.teslamotors.com/api/1/vehicles")
+func (a *AuthTesla) ListVehicles() []StateResponse {
+	resp, err := a.baseVehicleRequest("GET", "https://owner-api.teslamotors.com/api/1/vehicles")
 	if err != nil {
 		log.Println(err.Error())
 	}
@@ -21,8 +23,8 @@ func (a *AuthTesla) listVehiclesData() []StateResponse {
 	return r.StateResponse
 }
 
-func (a *AuthTesla) ListVehicleData(id string) StateResponse {
-	resp, err := a.getVehicleState("GET", "https://owner-api.teslamotors.com/api/1/vehicles/"+id+"/vehicle_data")
+func (a *AuthTesla) GetVehicleData() StateResponse {
+	resp, err := a.baseVehicleRequest("GET", "https://owner-api.teslamotors.com/api/1/vehicles/"+a.ID+"/vehicle_data")
 	if err != nil {
 		log.Println(err.Error())
 	}
@@ -35,21 +37,7 @@ func (a *AuthTesla) ListVehicleData(id string) StateResponse {
 	return r.StateResponse
 }
 
-func (a *AuthTesla) stateRequest() *State {
-	resp, err := a.getVehicleState("GET", "https://owner-api.teslamotors.com/api/1/vehicles/"+a.ID+"/vehicle_data")
-	if err != nil {
-		log.Println(err.Error())
-	}
-	var r State
-	defer resp.Body.Close()
-	respBody, _ := ioutil.ReadAll(resp.Body)
-	if err := json.Unmarshal(respBody, &r); err != nil {
-		log.Println(err.Error())
-	}
-	return &r
-}
-
-func (a *AuthTesla) getVehicleState(method, url string) (*http.Response, error) {
+func (a *AuthTesla) baseVehicleRequest(method, url string) (*http.Response, error) {
 	client := &http.Client{}
 	req, err := http.NewRequest(method, url, nil)
 	if err != nil {
