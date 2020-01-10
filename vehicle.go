@@ -194,6 +194,10 @@ func (a *AuthTesla) GetCarUserID() int64 {
 	return a.GetVehicleData().UserID
 }
 
+func (a *AuthTesla) GetID() int64 {
+	return a.GetVehicleData().UserID
+}
+
 func (a *AuthTesla) GetCarVehicleID() int64 {
 	return a.GetVehicleData().VehicleID
 }
