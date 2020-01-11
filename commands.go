@@ -7,7 +7,6 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"strconv"
 )
 
 func (a *AuthTesla) commandBaseRequest(cmd string) (string, error) {
@@ -85,21 +84,16 @@ func (a *AuthTesla) SetValetMode(on string, pin string) {
 	a.doRequest("set_valet_mode?on=" + on + "&password=" + pin)
 }
 
-func (a *AuthTesla) SetHeatedSeatTo(driver, level int) {
-	if level > 3 {
-		return
-	}
-	// 0 Driver 1 Passenger 2 Rear left 4 Rear center 5 Rear right
-	if driver > 5 {
-		return
-	}
-	levelAsString := strconv.Itoa(level)
-	driverAsString := strconv.Itoa(driver)
-	a.doRequest("remote_seat_heater_request?heater=" + driverAsString + "&level=" + levelAsString)
+func (a *AuthTesla) SetHeatedSeatTo(heater, level string) {
+	a.doRequest("remote_seat_heater_request?heater=" + heater + "&level=" + level)
 }
 
 func (a *AuthTesla) OpenTrunk(which string) {
 	a.doRequest("actuate_trunk?which_trunk=" + which)
+}
+
+func (a *AuthTesla) SetSentryMode(val string) {
+	a.doRequest("set_sentry_mode?on=" + val)
 }
 
 func (a *AuthTesla) doRequest(request string) {

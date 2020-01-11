@@ -3,11 +3,11 @@
 package tesla
 
 func (a *AuthTesla) GetCarType() string {
-	return a.GetVehicleData().VehicleState.CarType
+	return a.GetVehicleData().VehicleConfig.CarType
 }
 
 func (a *AuthTesla) GetChargePortType() string {
-	return a.GetVehicleData().VehicleState.ChargePortType
+	return a.GetVehicleData().VehicleConfig.ChargePortType
 }
 
 func (a *AuthTesla) IsEUVehicle() bool {
@@ -15,7 +15,11 @@ func (a *AuthTesla) IsEUVehicle() bool {
 }
 
 func (a *AuthTesla) GetExteriorColor() string {
-	return a.GetVehicleData().VehicleState.ExteriorColor
+	return a.GetVehicleData().VehicleConfig.ExteriorColor
+}
+
+func (a *AuthTesla) GetWheelType() string {
+	return a.GetVehicleData().VehicleConfig.WheelType
 }
 
 func (a *AuthTesla) GetOdometerReading() float64 {

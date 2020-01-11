@@ -52,15 +52,18 @@ type ChargeState struct {
 	NotEnoughPowerToHeat        bool    `json:"not_enough_power_to_heat"`
 }
 
+type VehicleConfig struct {
+	CarType        string `json:"car_type"`
+	ChargePortType string `json:"charge_port_type"`
+	ExteriorColor  string `json:"exterior_color"`
+	WheelType      string `json:"wheel_type"`
+}
+
 type VehicleState struct {
-	CarType          string  `json:"car_type"`
-	ChargePortType   string  `json:"charge_port_type"`
 	SentryModeActive bool    `json:"sentry_mode"`
 	IsLocked         bool    `json:"locked"`
 	IsEUVehicle      bool    `json:"eu_vehicle"`
-	ExteriorColor    string  `json:"exterior_color"`
 	CarVersion       string  `json:"car_version"`
-	SentryMode       bool    `json:"sentry_mode"`
 	Odometer         float64 `json:"Odometer"`
 }
 
@@ -88,17 +91,18 @@ type GUISettings struct {
 }
 
 type StateResponse struct {
-	ID           int64        `json:"id"`
-	UserID       int64        `json:"user_id"`
-	VehicleID    int64        `json:"vehicle_id"`
-	VIN          string       `json:"vin"`
-	Name         string       `json:"name"`
-	DisplayName  string       `json:"display_name"`
-	State        string       `json:"state"`
-	InService    bool         `json:"in_service"`
-	DriveState   DriveState   `json:"drive_state"`
-	ChargeState  ChargeState  `json:"charge_state"`
-	GUISettings  GUISettings  `json:"gui_settings"`
-	VehicleState VehicleState `json:"vehicle_state"`
-	ClimateState ClimateState `json:"climate_state"`
+	ID            int64         `json:"id"`
+	UserID        int64         `json:"user_id"`
+	VehicleID     int64         `json:"vehicle_id"`
+	VIN           string        `json:"vin"`
+	Name          string        `json:"name"`
+	DisplayName   string        `json:"display_name"`
+	State         string        `json:"state"`
+	InService     bool          `json:"in_service"`
+	DriveState    DriveState    `json:"drive_state"`
+	ChargeState   ChargeState   `json:"charge_state"`
+	GUISettings   GUISettings   `json:"gui_settings"`
+	VehicleState  VehicleState  `json:"vehicle_state"`
+	VehicleConfig VehicleConfig `json:"vehicle_config"`
+	ClimateState  ClimateState  `json:"climate_state"`
 }
