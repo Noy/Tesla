@@ -96,6 +96,10 @@ func (a *AuthTesla) SetSentryMode(val string) {
 	a.doRequest("set_sentry_mode?on=" + val)
 }
 
+func (a *AuthTesla) ControlWindow(command, lat, lon string) {
+	a.doRequest("window_control?command=" + command + "&lat=" + lat + "&lon=" + lon)
+}
+
 func (a *AuthTesla) doRequest(request string) {
 	do, err := a.commandBaseRequest(request)
 	if err != nil {
