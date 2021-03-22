@@ -7,40 +7,48 @@
 package main
 
 import (
-	"io/ioutil"
-	"log"
-	"net/http"
+    "context"
+    tesla "github.com/Noy/Tesla"
+    "log"
 )
 
 func main() {
-	client := &http.Client{}
-	req, err := http.NewRequest("POST", 
-                                "https://owner-api.teslamotors.com/oauth/token?grant_type=password&client_id=YOUR_CLIENT_IDI&client_secret=YOUR_CLIENT_SECRET&email=TESLA_EMAIL&password=TESLA_PASSWORD", 
-                                nil)
+	authToken, err := tesla.RetrieveToken(context.Background(), "tesla@email.com", "teslaPassword")
 	if err != nil {
-		// log err if there are any issues
+		// error handling is option for you
 	}
-	resp, err := client.Do(req)
-	if err != nil {
-		// again, error handling is option for you
-	}
-	body, _ := ioutil.ReadAll(resp.Body)
-	log.Println(string(body)) // log the result, which will be your auth token
+	log.Println(authToken) // log the result, which will be your auth token
 }
 ``` 
 
-#### After this, you can create your program and do things like:
+#### Then, you need to retrieve your car's ID:
 ```go
 package main
 
 import (
 	"github.com/Noy/Tesla"
-	"log"
-	"net/http"
+)
+// Authentication
+func getCarId() int64 {
+    authToken := "abc123"
+    // Use the auth token from before to authenticate with AuthTesla
+    auth := tesla.AuthTesla{AccessToken: authToken}
+    id := auth.ListVehicles()[0].ID
+    return id
+}
+```
+
+#### Finally, you can retrieve data about your car (or even perform actions!):
+```go
+package main
+
+import (
+	"github.com/Noy/Tesla"
 )
 // Authentication
 func authTesla() *tesla.AuthTesla {
 	var id, authToken string
+    // Use the auth token and ID from before to authenticate with AuthTesla
     teslaCar := tesla.AuthTesla{ID: id, AccessToken: authToken}
     return &teslaCar
 }
@@ -52,4 +60,5 @@ func honk() {
 }
 ```
 
-##### Ref: https://www.teslaapi.io/vehicles/state-and-settings
+##### Ref: https://www.teslaapi.io/
+##### Special thanks to: https://github.com/jsgoecke/tesla for new auth
